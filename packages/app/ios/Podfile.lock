@@ -85,6 +85,8 @@ PODS:
     - React-fishhook (= 0.60.4)
   - RNGestureHandler (1.3.0):
     - React
+  - RNVectorIcons (6.6.0):
+    - React
   - yoga (0.60.4.React)
 
 DEPENDENCIES:
@@ -111,6 +113,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
@@ -160,6 +163,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/Libraries/WebSocket
   RNGestureHandler:
     :path: ../node_modules/react-native-gesture-handler
+  RNVectorIcons:
+    :path: ../node_modules/react-native-vector-icons
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
@@ -188,8 +193,9 @@ SPEC CHECKSUMS:
   React-RCTVibration: dabb8d59bb47e1d9124b3f77bfdc1b33d42b0a74
   React-RCTWebSocket: f32b93e0953d7c07fd5dd45305406282cfdc95cf
   RNGestureHandler: 7ccf2f3f60458e084f9ada01fbaf610f6fef073c
+  RNVectorIcons: 66af4d5c8ff4f584c7b7cd9c4b0780920f27fce2
   yoga: 88c514f310aff89b94a14c5fbf44b95735af0cb7
 
-PODFILE CHECKSUM: e88524f206c03efa688cd4a4a7390231e7729d72
+PODFILE CHECKSUM: 47b23fe1fbf13e4479e347fae694f753f319e20e
 
 COCOAPODS: 1.4.0
