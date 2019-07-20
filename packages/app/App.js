@@ -5,6 +5,20 @@ const App = createAppContainer(
     Home: {
       screen: require('./src/screens/Home').default,
     },
+    Modal: {
+      screen: createStackNavigator(
+        {
+          Login: {
+            screen: require('./src/screens/Login').default,
+          },
+        },
+        {
+          mode: 'modal',
+          headerMode: 'none',
+          navigationOptions: { title: 'Login' },
+        },
+      ),
+    },
   }),
 );
 
