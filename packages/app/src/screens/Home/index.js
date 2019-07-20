@@ -36,6 +36,6 @@ function createOnLogout({ navigation }) {
 
 function createOnLogin({ navigation }) {
   return () => {
-    navigation.navigate('Modal');
+    navigation.navigate('Login');
   };
 }

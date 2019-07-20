@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Button as RNButton } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
 import styles from './styles';
@@ -41,6 +41,20 @@ const Comp = ({ navigation }) => {
       />
     </View>
   );
+};
+
+Comp.navigationOptions = ({ navigation }) => {
+  return {
+    title: 'Login',
+    headerLeft: (
+      <RNButton
+        title="Back"
+        onPress={() => {
+          navigation.pop();
+        }}
+      />
+    ),
+  };
 };
 
 export default Comp;
