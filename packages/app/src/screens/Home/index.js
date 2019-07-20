@@ -1,12 +1,29 @@
-import React from 'react';
-import { View, Button } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Button, FlatList } from 'react-native';
 
 import styles from './styles';
 import isLogin from '../../instagram/apis/isLogin';
 import logout from '../../instagram/apis/logout';
+import usePosts from '../../hooks/usePosts';
+import LocationItem from '../../components/LocationItem';
 
 const Comp = ({ navigation }) => {
-  return <View style={styles.container} />;
+  const [posts] = usePosts({ isAuthenticated: navigation.getParam('isAuthenticated') });
+  useEffect(() => {
+    const title = 'Instapp ' + (posts.length ? `(${posts.length})` : '');
+    navigation.setParams({ title });
+  }, [posts.length]);
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={posts}
+        keyExtractor={(obj) => obj.id}
+        renderItem={({ item }) => {
+          return <LocationItem {...item} />;
+        }}
+      />
+    </View>
+  );
 };
 
 Comp.navigationOptions = ({ navigation }) => {
@@ -14,12 +31,13 @@ Comp.navigationOptions = ({ navigation }) => {
   if (isAuthenticated === undefined) {
     isLogin().then((val) => navigation.setParams({ isAuthenticated: val }));
   }
+  const title = navigation.getParam('title');
   // prettier-ignore
   const headerRight = isAuthenticated
     ? <Button onPress={createOnLogout({ navigation })} title="Logout" />
     : <Button onPress={createOnLogin({ navigation })} title="Login" />;
   return {
-    title: 'Instapp',
+    title,
     headerRight,
   };
 };
