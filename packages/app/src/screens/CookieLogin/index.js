@@ -9,14 +9,7 @@ import styles from './styles';
 const Comp = ({ navigation }) => {
   const [cookie, setCookie] = useState('');
   useEffect(() => {
-    navigation.setParams({
-      onSubmit: () => {
-        createOnLogin({
-          cookie,
-          navigation,
-        })();
-      },
-    });
+    navigation.setParams({ onSubmit: createOnLogin({ cookie, navigation }) });
   }, [cookie]);
   return (
     <View style={styles.container}>
