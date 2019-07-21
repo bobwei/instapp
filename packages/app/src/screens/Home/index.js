@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { View, Button, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
+import { Button } from 'react-native-elements';
 
 import styles from './styles';
 import isLogin from '../../instagram/apis/isLogin';
@@ -37,8 +38,8 @@ Comp.navigationOptions = ({ navigation }) => {
   const title = navigation.getParam('title');
   // prettier-ignore
   const headerRight = isAuthenticated
-    ? <Button onPress={createOnLogout({ navigation })} title="Logout" />
-    : <Button onPress={createOnLogin({ navigation })} title="Login" />;
+    ? <Button onPress={createOnLogout({ navigation })} title="Logout" type="clear" />
+    : <Button onPress={createOnLogin({ navigation })} title="Login" type="clear" />;
   return {
     title,
     headerRight,
