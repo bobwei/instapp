@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useState } from 'react';
-import { View, Button as RNButton } from 'react-native';
+import { View, Button as RNButton, Platform } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
 import styles from './styles';
@@ -44,6 +44,15 @@ const Comp = ({ navigation }) => {
 };
 
 Comp.navigationOptions = ({ navigation }) => {
+  // prettier-ignore
+  const headerRight = Platform.OS === 'ios'
+    ? <RNButton
+        title="Cookie"
+        onPress={() => {
+          navigation.navigate('CookieLogin');
+        }}
+      />
+    : null;
   return {
     title: 'Login',
     headerLeft: (
@@ -54,14 +63,7 @@ Comp.navigationOptions = ({ navigation }) => {
         }}
       />
     ),
-    headerRight: (
-      <RNButton
-        title="Cookie"
-        onPress={() => {
-          navigation.navigate('CookieLogin');
-        }}
-      />
-    ),
+    headerRight,
   };
 };
 
