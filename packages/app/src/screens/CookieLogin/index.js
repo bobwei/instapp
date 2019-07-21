@@ -1,14 +1,23 @@
 /* eslint-disable no-alert */
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import React, { useState, useEffect } from 'react';
+import { View, Button } from 'react-native';
+import { Input } from 'react-native-elements';
 import CookieManager from 'react-native-cookies';
 
 import styles from './styles';
 
 const Comp = ({ navigation }) => {
   const [cookie, setCookie] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    navigation.setParams({
+      onSubmit: () => {
+        createOnLogin({
+          cookie,
+          navigation,
+        })();
+      },
+    });
+  }, [cookie]);
   return (
     <View style={styles.container}>
       <Input
@@ -20,16 +29,6 @@ const Comp = ({ navigation }) => {
         autoCapitalize="none"
         multiline
       />
-      <Button
-        style={styles.section}
-        title={!isLoading ? 'Submit' : 'Loading...'}
-        type="solid"
-        onPress={createOnLogin({
-          cookie,
-          navigation,
-          setIsLoading,
-        })}
-      />
     </View>
   );
 };
@@ -37,14 +36,14 @@ const Comp = ({ navigation }) => {
 Comp.navigationOptions = ({ navigation }) => {
   return {
     title: 'Login',
+    headerRight: <Button title="Submit" onPress={navigation.getParam('onSubmit')} />,
   };
 };
 
 export default Comp;
 
-function createOnLogin({ cookie, navigation, setIsLoading }) {
+function createOnLogin({ cookie, navigation }) {
   return async () => {
-    setIsLoading(true);
     const lines = cookie.split('\n');
     for (const line of lines) {
       const [domain, , , , expiration, name, value] = line.split('	');
@@ -65,7 +64,6 @@ function createOnLogin({ cookie, navigation, setIsLoading }) {
         .catch(error => {
           alert(error);
         });
-      setIsLoading(false);
       navigation.navigate('Home', { isAuthenticated: true });
     }
   };
