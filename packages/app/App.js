@@ -15,6 +15,9 @@ const App = createAppContainer(
           Login: {
             screen: require('./src/screens/Login').default,
           },
+          CookieLogin: {
+            screen: require('./src/screens/CookieLogin').default,
+          },
         }),
       },
     },

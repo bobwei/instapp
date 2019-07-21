@@ -54,6 +54,14 @@ Comp.navigationOptions = ({ navigation }) => {
         }}
       />
     ),
+    headerRight: (
+      <RNButton
+        title="Cookie"
+        onPress={() => {
+          navigation.navigate('CookieLogin');
+        }}
+      />
+    ),
   };
 };
 
