@@ -6,15 +6,16 @@ import getTimeline from '../../instagram/apis/getTimeline';
 import getOwnerTimeline from '../../instagram/apis/getOwnerTimeline';
 
 const fn = ({ isAuthenticated }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadData({ setPosts });
+      loadData({ setPosts, setIsLoading });
     }
   }, [isAuthenticated]);
 
-  return [posts, setPosts];
+  return [posts, isLoading, () => loadData({ setPosts, setIsLoading })];
 };
 
 export default fn;
@@ -22,7 +23,8 @@ export default fn;
 export const friendsKey = '@project/friends';
 export const postsKey = '@project/posts';
 
-async function loadData({ setPosts }) {
+async function loadData({ setPosts, setIsLoading }) {
+  setIsLoading(true);
   const friends = await (async () => {
     const latest = await getTimeline()
       .then(R.pathOr([], ['data', 'user', 'edge_web_feed_timeline', 'edges']))
@@ -39,4 +41,5 @@ async function loadData({ setPosts }) {
     posts.push(...result);
     setPosts([...posts]);
   }
+  setIsLoading(false);
 }

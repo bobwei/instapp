@@ -8,7 +8,8 @@ import usePosts from '../../hooks/usePosts';
 import LocationItem from '../../components/LocationItem';
 
 const Comp = ({ navigation }) => {
-  const [posts] = usePosts({ isAuthenticated: navigation.getParam('isAuthenticated') });
+  const isAuthenticated = navigation.getParam('isAuthenticated');
+  const [posts, isLoading, refresh] = usePosts({ isAuthenticated });
   useEffect(() => {
     const title = 'Instapp ' + (posts.length ? `(${posts.length})` : '');
     navigation.setParams({ title });
@@ -21,6 +22,8 @@ const Comp = ({ navigation }) => {
         renderItem={({ item }) => {
           return <LocationItem {...item} />;
         }}
+        refreshing={isLoading}
+        onRefresh={refresh}
       />
     </View>
   );
