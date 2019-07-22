@@ -20,6 +20,13 @@ const App = createAppContainer(
           },
         }),
       },
+      IGLogin: {
+        screen: createStackNavigator({
+          IGLogin: {
+            screen: require('./src/screens/IGLogin').default,
+          },
+        }),
+      },
     },
     {
       mode: 'modal',

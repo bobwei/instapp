@@ -58,6 +58,6 @@ function createOnLogout({ navigation }) {
 
 function createOnLogin({ navigation }) {
   return () => {
-    navigation.navigate('Login');
+    navigation.navigate('IGLogin');
   };
 }
