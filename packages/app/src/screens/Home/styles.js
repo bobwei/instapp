@@ -7,6 +7,10 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
   },
+  map: {
+    flex: 1,
+    height: 200,
+  },
 });
 
 export default styles;
