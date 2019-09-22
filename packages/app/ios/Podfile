@@ -34,6 +34,8 @@ target 'app' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
   target 'appTests' do
     inherit! :search_paths
     # Pods for testing
