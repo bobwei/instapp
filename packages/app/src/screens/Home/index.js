@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react';
 import { View, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
+import isLogin from '@bobwei/instagram-api/lib/apis/isLogin';
+import logout from '@bobwei/instagram-api/lib/apis/logout';
 
 import styles from './styles';
-import isLogin from '../../instagram/apis/isLogin';
-import logout from '../../instagram/apis/logout';
 import usePosts from '../../hooks/usePosts';
 import LocationItem from '../../components/LocationItem';
 
-const Comp = ({ navigation }) => {
+const Comp = (props) => {
+  const { navigation } = props;
   const isAuthenticated = navigation.getParam('isAuthenticated');
   const [posts, isLoading, refresh] = usePosts({ isAuthenticated });
   useEffect(() => {
     const title = 'Instapp ' + (posts.length ? `(${posts.length})` : '');
     navigation.setParams({ title });
   }, [posts.length]);
+  setupListeners(props);
   return (
     <View style={styles.container}>
       <FlatList
@@ -47,6 +49,17 @@ Comp.navigationOptions = ({ navigation }) => {
 };
 
 export default Comp;
+
+function setupListeners({ navigation, isAuthenticated }) {
+  useEffect(() => {
+    const listener = navigation.addListener('didFocus', () => {
+      isLogin().then((val) => navigation.setParams({ isAuthenticated: val }));
+    });
+    return () => {
+      listener.remove();
+    };
+  }, []);
+}
 
 function createOnLogout({ navigation }) {
   return () => {

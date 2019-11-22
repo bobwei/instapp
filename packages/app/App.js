@@ -1,38 +1,16 @@
+import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import IGLogin from '@bobwei/instagram-api/lib/components/IGLogin';
 
 const App = createAppContainer(
-  createStackNavigator(
-    {
-      Main: {
-        screen: createStackNavigator({
-          Home: {
-            screen: require('./src/screens/Home').default,
-          },
-        }),
-      },
-      Login: {
-        screen: createStackNavigator({
-          Login: {
-            screen: require('./src/screens/Login').default,
-          },
-          CookieLogin: {
-            screen: require('./src/screens/CookieLogin').default,
-          },
-        }),
-      },
-      IGLogin: {
-        screen: createStackNavigator({
-          IGLogin: {
-            screen: require('./src/screens/IGLogin').default,
-          },
-        }),
-      },
+  createStackNavigator({
+    Home: {
+      screen: require('./src/screens/Home').default,
     },
-    {
-      mode: 'modal',
-      headerMode: 'none',
+    IGLogin: {
+      screen: ({ navigation }) => <IGLogin onSuccess={() => navigation.pop()} />,
     },
-  ),
+  }),
 );
 
 export default App;
