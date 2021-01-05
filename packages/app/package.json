@@ -16,7 +16,7 @@
   "dependencies": {
     "@bobwei/instagram-api": "^1.2.0",
     "@react-native-community/async-storage": "^1.5.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "get-yarn-workspaces": "^1.0.2",
     "query-string": "^6.8.1",
     "ramda": "^0.26.1",
